@@ -3,3 +3,6 @@ class Site():
     
     Will have attributes such as name, fields, etc.
     """
+    def __init__(self, name, fields):
+        self.name = name
+        self.fields = []
