@@ -1,3 +1,7 @@
+
+import urllib.request
+from bs4 import BeautifulSoup
+
 def scrape(site):
     """Scrapes a website for the required information needed to checkout.
     
@@ -7,3 +11,13 @@ def scrape(site):
     Returns:
         List of data required for checking out. 
     """
+    
+#specify the url
+fl = "https://www.footlocker.com/checkout"
+
+#query the site and return the html
+page = urllib.request.urlopen(fl)
+
+#parse the html
+soup = BeautifulSoup(page, "html.parser")
+
