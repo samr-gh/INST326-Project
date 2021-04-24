@@ -1,23 +1,24 @@
 
 import urllib.request
 from bs4 import BeautifulSoup
+import time
 
-def scrape(site):
-    """Scrapes a website for the required information needed to checkout.
-    
-    Args:
-        site(Site object): a website object taken from a store's website. 
-        
-    Returns:
-        List of data required for checking out. 
-    """
-    
 #specify the url
-fl = "https://www.footlocker.com/checkout"
+fl = "https://www.footlocker.com/category/mens/shoes.html"
 
 #query the site and return the html
 page = urllib.request.urlopen(fl)
+time.sleep(2)
 
 #parse the html
 soup = BeautifulSoup(page, "html.parser")
+
+# for p in soup.find_all('span', class_='ProductName-primary'):
+#     print(p.text)
+   
+# for p in soup.find_all('span', class_='ProductPrice'):
+#     print(p.text)
+
+for p in soup.find_all("a", class_="ProductCard-link ProductCard-content"):
+     print(p.text)
 
