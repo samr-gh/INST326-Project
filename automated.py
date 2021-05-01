@@ -1,4 +1,11 @@
 
+"""This is code that was for a part of the project, but after talking with
+Instructor Cruz we are taking a different approach and using Selenium. 
+We are keeping this code here just in case as well to show the progress
+that we had made before the change. 
+
+Disregard this code. 
+"""
 import urllib.request
 from bs4 import BeautifulSoup
 import time
@@ -64,14 +71,3 @@ class Shoe:
           self.color = color
           self.price = price
           
-class Site():
-     """An object that represents products of a website. 
-    
-     Attributes:
-          products (list of Shoe objects): A list of Shoe objects where each
-               object corresponds to a shoe on the site. 
-    """
-    products = []
-    
-    def __init__(self):
-        self.products.append(Shoe())
