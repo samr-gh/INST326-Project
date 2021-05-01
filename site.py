@@ -42,7 +42,7 @@ class Shoe:
           self.product_num = product_num
           self.brand = brand
           
-    def __repr__(self):
+     def __repr__(self):
         pass
 
 def store_features(links):
