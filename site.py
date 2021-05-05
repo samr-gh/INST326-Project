@@ -4,6 +4,26 @@
     written down. 
 """
 
+import requests
+import time
+from selenium import webdriver
+
+PATH = "C:\Program Files (x86)\chromedriver.exe"
+driver = webdriver.Chrome(PATH)
+
+driver.get("https://www.footlocker.com/category/mens/shoes.html")
+
+driver.implicitly_wait(1)
+driver.refresh()
+driver.implicitly_wait(1)
+driver.find_elements_by_link_text("Next")[0].click()
+driver.implicitly_wait(2)
+
+#r = requests.get("https://www.footlocker.com/category/mens/shoes.html")
+#print(r)
+
+
+
 def scrape(url):
     """Uses Selenium to iterate through all pages of Footlocker's Men's shoes. 
         Gathers the links of all the shoes and stores them to a list. 
@@ -41,8 +61,8 @@ class Shoe:
           self.sizes = sizes
           self.product_num = product_num
           self.brand = brand
-          
-    def __repr__(self):
+              
+     def __repr__(self):
         pass
 
 def store_features(links):
