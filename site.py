@@ -7,35 +7,53 @@
 import requests
 import time
 from selenium import webdriver
-
-PATH = "C:\Program Files (x86)\chromedriver.exe"
-driver = webdriver.Chrome(PATH)
-
-driver.get("https://www.footlocker.com/category/mens/shoes.html")
-
-driver.implicitly_wait(1)
-driver.refresh()
-driver.implicitly_wait(1)
-driver.find_elements_by_link_text("Next")[0].click()
-driver.implicitly_wait(2)
-
-#r = requests.get("https://www.footlocker.com/category/mens/shoes.html")
-#print(r)
-
-
+from selenium.webdriver.common.keys import Keys
+from automated import Data
 
 def scrape(url):
     """Uses Selenium to iterate through all pages of Footlocker's Men's shoes. 
-        Gathers the links of all the shoes and stores them to a list. 
+        Calls the Data class from automated.py to store the data to a tuple. 
     
     Args:
         url (str): the url of the Footlocker website. 
         
     Returns:
-        A list of links to each Men's shoe.
+        A list of links to each Men's shoe on the url page.
     """
-    list_links = []
-    pass
+    shoe_links = []
+    state = True
+    
+    shoe_links.extend(Data.get_product_link(url))
+    
+    PATH = "C:\Program Files (x86)\chromedriver.exe"
+    driver = webdriver.Chrome(PATH)
+    driver.get(url)
+    time.sleep(7)
+    webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+    time.sleep(1)
+    
+    i = 0
+    while state == True and i < 4:
+        try:
+            i += 1
+            print("loop " + str(i))
+
+            driver.find_elements_by_link_text("Next")[0].click()
+            time.sleep(4)
+            new = driver.current_url
+            print("New: " + new)
+            r = requests.get(new).url
+            print("R: " + r)
+            shoe_links.extend(Data.get_product_link(r))
+        except AttributeError as e:
+            #print(e)
+            driver.close()
+            state = False
+
+    #print(shoe_links)
+
+url = "https://www.footlocker.com/category/mens/shoes.html?currentPage=0"
+scrape(url)
 
 class Shoe:
      """An object that represents features of a shoe on Footlocker.  

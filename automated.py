@@ -9,47 +9,64 @@ Disregard this code.
 import urllib.request
 from bs4 import BeautifulSoup
 import time
+import re
 
-def get_product_fl(site):
-     """Takes a Footlocker web page as a parameter and returns the product
-          details as a string. 
-     
-     Args: 
-          site (str): the url of the desired Footlocker page. 
+class Data:
+     def get_product_fl(site):
+          """Takes a Footlocker web page as a parameter and returns the product
+               details as a string. 
           
-     Returns: 
-          A tuple of lists that contains details of the products on the page.
-     """
-     product_names = []
-     product_gender = []
-     product_colors = []
-     product_prices = []
-     
-     #specify the url
-     fl = "https://www.footlocker.com/category/mens/shoes.html"
-
-     #query the site and return the html
-     page = urllib.request.urlopen(fl)
-     time.sleep(2)
-
-     #parse the html
-     soup = BeautifulSoup(page, "html.parser")
-
-     for p in soup.find_all('span', class_='ProductName-primary'):
-          product_names.append(p.text)
-     
-     for p in soup.find_all('span', class_='ProductName-alt'):
-          gender = (re.search(r"(.*)•", p.text)).group(1)
-          product_gender.append(gender)
-
-     for p in soup.find_all('span', class_='ProductName-alt'):
-          colors = (re.search(r"•(.*)", p.text)).group(1)
-          product_colors.append(colors)
+          Args: 
+               site (str): the url of the desired Footlocker page. 
+               
+          Returns: 
+               A tuple of lists that contains details of the products on the page.
+          """
+          product_names = []
+          product_gender = []
+          product_colors = []
+          product_prices = []
           
-     for p in soup.find_all('span', class_='ProductPrice'):
-          product_prices.append(float(p.text[1:]))
-     
-     return product_names, product_gender, product_colors, product_prices
+          #specify the url
+          #fl = "https://www.footlocker.com/category/mens/shoes.html"
+
+          #query the site and return the html
+          page = urllib.request.urlopen(site)
+          time.sleep(2)
+
+          #parse the html
+          soup = BeautifulSoup(page, "html.parser")
+
+          for p in soup.find_all('span', class_='ProductName-primary'):
+               product_names.append(p.text)
+          
+          for p in soup.find_all('span', class_='ProductName-alt'):
+               gender = (re.search(r"(.*)•", p.text)).group(1)
+               product_gender.append(gender)
+
+          for p in soup.find_all('span', class_='ProductName-alt'):
+               colors = (re.search(r"•(.*)", p.text)).group(1)
+               product_colors.append(colors)
+               
+          for p in soup.find_all('span', class_='ProductPrice'):
+               product_prices.append(float(p.text[1:]))
+          
+          print(product_names, product_gender, product_colors, product_prices)
+
+     def get_product_link(site):
+          list_links = []
+          page = urllib.request.urlopen(site)
+          time.sleep(2)
+
+          #parse the html
+          soup = BeautifulSoup(page, "html.parser")
+
+          for p in soup.find_all("a", class_="ProductCard-link ProductCard-content"):
+               list_links.append("https://www.footlocker.com" + p.get("href"))
+          return list_links
+          
+url = "https://www.footlocker.com/category/mens/shoes.html?currentPage=0"
+Data.get_product_link(url)
 
 class Shoe:
      """An object that represents features of a shoe on a store's site. 
@@ -71,3 +88,4 @@ class Shoe:
           self.color = color
           self.price = price
           
+#get_product_fl()
