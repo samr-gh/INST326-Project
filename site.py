@@ -28,31 +28,30 @@ def scrape(url):
     PATH = "C:\Program Files (x86)\chromedriver.exe"
     driver = webdriver.Chrome(PATH)
     driver.get(url)
-    time.sleep(7)
+    time.sleep(4)
     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
-    time.sleep(1)
     
-    i = 0
-    while state == True and i < 4:
+    i = 1
+    while state == True:# and i < 4:
         try:
             i += 1
-            print("loop " + str(i))
+            print("loop " + str(i - 1))
 
-            driver.find_elements_by_link_text("Next")[0].click()
-            time.sleep(4)
+            driver.find_elements_by_link_text(str(i))[0].click()
+            time.sleep(2)
             new = driver.current_url
-            print("New: " + new)
             r = requests.get(new).url
             print("R: " + r)
             shoe_links.extend(Data.get_product_link(r))
-        except AttributeError as e:
-            #print(e)
-            driver.close()
+            print(len(shoe_links))
+        except IndexError:
+            print(e)
+            #driver.close()
             state = False
 
-    #print(shoe_links)
+    print(shoe_links)
 
-url = "https://www.footlocker.com/category/mens/shoes.html?currentPage=0"
+url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 scrape(url)
 
 class Shoe:

@@ -7,6 +7,7 @@ that we had made before the change.
 Disregard this code. 
 """
 import urllib.request
+import requests
 from bs4 import BeautifulSoup
 import time
 import re
@@ -56,8 +57,9 @@ class Data:
      def get_product_link(site):
           list_links = []
           page = urllib.request.urlopen(site)
+          #page = requests.get(site).url
           time.sleep(2)
-
+          
           #parse the html
           soup = BeautifulSoup(page, "html.parser")
 
@@ -65,7 +67,7 @@ class Data:
                list_links.append("https://www.footlocker.com" + p.get("href"))
           return list_links
           
-url = "https://www.footlocker.com/category/mens/shoes.html?currentPage=0"
+url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 Data.get_product_link(url)
 
 class Shoe:
