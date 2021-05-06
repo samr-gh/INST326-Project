@@ -32,7 +32,7 @@ def scrape(url):
     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
     
     i = 1
-    while state == True:# and i < 4:
+    while state == True:
         try:
             i += 1
             print("loop " + str(i - 1))
@@ -45,11 +45,10 @@ def scrape(url):
             shoe_links.extend(Data.get_product_link(r))
             print(len(shoe_links))
         except IndexError:
-            print(e)
-            #driver.close()
+            driver.close()
             state = False
 
-    print(shoe_links)
+    return shoe_links
 
 url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 scrape(url)
