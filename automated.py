@@ -27,30 +27,37 @@ class Data:
           product_gender = []
           product_colors = []
           product_prices = []
+          product_description = []
+          product_rating = []
+          product_sizes = []
+          product_num = []
+          product_brand = []
           
           #specify the url
-          #fl = "https://www.footlocker.com/category/mens/shoes.html"
+          #fl = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 
           #query the site and return the html
           page = urllib.request.urlopen(site)
           time.sleep(2)
 
           #parse the html
-          soup = BeautifulSoup(page, "html.parser")
+          soup = BeautifulSoup(page.text, "html.parser")
 
-          for p in soup.find_all('span', class_='ProductName-primary'):
+          for p in soup.findAll('span', class_='ProductName-primary'):
                product_names.append(p.text)
           
-          for p in soup.find_all('span', class_='ProductName-alt'):
+          for p in soup.findAll('span', class_='ProductName-alt'):
                gender = (re.search(r"(.*)•", p.text)).group(1)
                product_gender.append(gender)
 
-          for p in soup.find_all('span', class_='ProductName-alt'):
+          for p in soup.findAll('span', class_='ProductName-alt'):
                colors = (re.search(r"•(.*)", p.text)).group(1)
                product_colors.append(colors)
                
-          for p in soup.find_all('span', class_='ProductPrice'):
+          for p in soup.findAll('span', class_='ProductPrice'):
                product_prices.append(float(p.text[1:]))
+          
+          for p in soup.findAll('span', class_='')
           
           print(product_names, product_gender, product_colors, product_prices)
 
