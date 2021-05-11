@@ -91,6 +91,19 @@ def store_features(links):
     Returns:
         The csv file created. 
     """
+    # for feature in get_product_fl:
+    #     links = []
+    #     links.append(feature['product_names'])
+    #     links.append(feature.product_names)
+    # print(links)
+    
+    #     links = []
+    #     name = feature.find('name')
+    #     gender = feature.find('gender')
+    #     links.append((name, gender))
+        
+    # df = pd.DataFrame(links, columns = [name])
+    # df.to_csv('shoe_attributes.csv', encoding='utf-8')
     pass
 
 def print_features(shoe):
