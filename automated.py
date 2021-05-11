@@ -34,43 +34,50 @@ class Data:
           product_brand = []
           
           #specify the url
-          #fl = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
+          # fl = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 
           #query the site and return the html
           page = urllib.request.urlopen(site)
           time.sleep(2)
 
           #parse the html
-          soup = BeautifulSoup(page.text, "html.parser")
+          soup = BeautifulSoup(page, "html.parser")
 
           for p in soup.findAll('span', class_='ProductName-primary'):
                product_names.append(p.text)
           
           for p in soup.findAll('span', class_='ProductName-alt'):
-               gender = (re.search(r"(.*)•", p.text)).group(1)
-               product_gender.append(gender)
+               product_gender.append(p.text)
 
-          for p in soup.findAll('span', class_='ProductName-alt'):
-               colors = (re.search(r"•(.*)", p.text)).group(1)
+          for p in soup.findAll('div', class_='ProductDetails-form__info'):
+               colors = (re.search(r'(.*)', p.text))
                product_colors.append(colors)
                
           for p in soup.findAll('span', class_='ProductPrice'):
-               product_prices.append(float(p.text[1:]))
+                product_prices.append(float(p.text[1:]))
           
-          for p in soup.findAll('meta', class_='content'):
-               description(re.search(r"", p.text)).group(1)
-          
-          for p in soup.findAll('span', class_='bv-rating-stars-on bv-rating-stars bv-width-from-rating-stats-90'):
-          
-          for p in soup.findAll('span', class_='c-form-label-content'):
+          for p in soup.findAll('div', class_='ProductDetails-description'):
+               product_description.append(p.text)
+     
+          for p in soup.findAll('a', class_='bv-rating bv-text-link bv-popup-target bv-focusable'):
+               product_rating.append(p.text)
+               
+          for p in soup.findAll('div', class_='ProductSize-group'):
                product_sizes.append(p.text)
           
-          for p in soup.findAll('span', class_='ProductID'):
+          for p in soup.findAll('div', class_='Tab-panel'):
+               number = (re.search(r"#:(.*) ", p.text)).group(1)
+               product_num.append(number)
           
-          for p in soup.findAll('span', class_=''):
+          for p in soup.findAll('span', class_='ProductName-primary'):
+               brand = (re.search(r"/w+/s", p.text))
+               product_brand.append(brand)
           
-          print(product_names, product_gender, product_colors, product_prices)
+          print(product_names, product_gender, product_colors, product_prices, product_description, product_rating, product_sizes, product_num, product_brand)
+          
+          
 
+          
      def get_product_link(site):
           list_links = []
           page = urllib.request.urlopen(site)
@@ -86,25 +93,6 @@ class Data:
           
 url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 Data.get_product_link(url)
+Data.get_product_fl("https://www.footlocker.com/product/nike-air-force-1-07-le-low-womens/D8959100.html")
 
-class Shoe:
-     """An object that represents features of a shoe on a store's site. 
-     
-     Attributes:
-          name (str): the name of the shoe
-          gender (str): the gender of the shoe
-          color (str): the colors of the shoe
-          price (float): the price of the shoe
-     """
-     name = ""
-     gender = ""
-     color = ""
-     price = 0.0
-     
-     def __init__(self, name, gender, color, price):
-          self.name = name
-          self.gender = gender
-          self.color = color
-          self.price = price
-          
 #get_product_fl()
