@@ -6,6 +6,8 @@
 
 import requests
 import time
+import csv
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from automated import Data
@@ -91,7 +93,25 @@ def store_features(links):
     Returns:
         The csv file created. 
     """
-    pass
+    ada = {}
+    for feature in get_product_fl:
+        #ada.update(feature['product_names'])
+        ada.add('Product Names', feature['product_names'])
+        
+    # for feature in get_product_fl:
+    #     links = []
+    #     links.append(feature['product_names'])
+    #     links.append(feature.product_names)
+    # print(links)
+    
+    #     links = []
+    #     name = feature.find('name')
+    #     gender = feature.find('gender')
+    #     links.append((name, gender))
+        
+    df = pd.DataFrame(links, columns = [name])
+    df.to_csv('shoe_attributes.csv', encoding='utf-8')
+    
 
 def print_features(shoe):
     """Takes a Shoe object and prints the attributes of it
