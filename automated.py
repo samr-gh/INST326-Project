@@ -76,8 +76,6 @@ class Data:
           print(product_names, product_gender, product_colors, product_prices, product_description, product_rating, product_sizes, product_num, product_brand)
           
           
-
-          
      def get_product_link(site):
           list_links = []
           page = urllib.request.urlopen(site)
