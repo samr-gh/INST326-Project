@@ -60,14 +60,14 @@ class Data:
           for p in soup.findAll('meta', class_='content'):
                description(re.search(r"", p.text)).group(1)
           
-          for p in soup.findAll('span', class_='bv-rating-stars-on bv-rating-stars bv-width-from-rating-stats-90'):
+          # for p in soup.findAll('span', class_='bv-rating-stars-on bv-rating-stars bv-width-from-rating-stats-90'):
           
-          for p in soup.findAll('span', class_='c-form-label-content'):
-               product_sizes.append(p.text)
+          # for p in soup.findAll('span', class_='c-form-label-content'):
+          #      product_sizes.append(p.text)
           
-          for p in soup.findAll('span', class_='ProductID'):
+          # for p in soup.findAll('span', class_='ProductID'):
           
-          for p in soup.findAll('span', class_=''):
+          # for p in soup.findAll('span', class_=''):
           
           print(product_names, product_gender, product_colors, product_prices)
 
