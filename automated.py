@@ -61,7 +61,7 @@ class Data:
                product_sizes.append(p.text)
                
                p = soup.find('div', class_='Tab-panel')
-               number = re.search(r"#: (\w+)", p.text).group(1)
+               number = re.search(r"#: (\w+\d)", p.text).group(1)
                product_num.append(number)
         
           print({"Name": product_names, "Gender": product_gender, 
@@ -140,8 +140,8 @@ class Data:
 url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 #Data.get_product_link(url)
 s = Data.scrape(url)
-print(s[0])
-print("len: ", len(s))
+# print(s[0])
+# print("len: ", len(s))
 #Data.get_product_fl(s)
 
 #get_product_fl()
