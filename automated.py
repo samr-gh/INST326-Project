@@ -5,6 +5,9 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.common.by import By
 import time
 import re
 
@@ -110,28 +113,33 @@ class Data:
           time.sleep(5)
           webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
           time.sleep(3)
-          try:
-               driver.find_element_by_id("touAgreeBtn").click()
-          except:
-               pass
+          # try:
+          #     agree = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, '//*[@id="touAgreeBtn"]/div/div')))
+          #     agree.click()
+          # except:
+          #     driver.close()
+          #driver.find_elements_by_link_text("I AGREE").click()
+          
           i = 1
           while i < 2:#state == True:
                try:
                     i += 1
+                    #print("loop " + str(i - 1))
+
                     driver.find_elements_by_link_text(str(i))[0].click()
                     time.sleep(2)
                     new = driver.current_url
                     r = requests.get(new).url
                     shoe_links.extend(Data.get_product_link(r))
                except IndexError:
-                    driver.close()
+                    #driver.close()
                     state = False
 
           return shoe_links
 
 url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 #Data.get_product_link(url)
-print(Data.scrape(url))
+s = Data.scrape(url)
 # print(s[0])
 # print("len: ", len(s))
 #Data.get_product_fl(s)
