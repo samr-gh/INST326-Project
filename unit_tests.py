@@ -45,6 +45,7 @@ class TestAuto(unittest.TestCase):
 			
 		#This is to test that we get the required list of links 
 		# assertListEqual Data.get_product_link == [] 
-	def test_store_features(self):
-    	self.assertEqual(store_features.csv, dict)
+class TestSite(unittest.TestCase):
+    def test_storefeatures(self):
+        self.assertEqual(store_features.csv, dict)
     
