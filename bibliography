@@ -2,4 +2,8 @@ These are the sources we used to help write this program.
 The numbers will be referenced in the code so you can see which ones were used where. 
 
 1. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.from_dict.html 
+    Used in the implementation of from_dict().
 2. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
+    Used in the implementation of to_csv().
+3. https://docs.python.org/3/library/argparse.html
+    Used to help in the writing of the parse_args() function.

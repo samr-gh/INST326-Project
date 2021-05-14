@@ -130,7 +130,7 @@ class Data:
           driver = webdriver.Chrome(PATH)
           driver.get(url)
           
-          time.sleep(2)
+          time.sleep(1.5)
           try:
                driver.find_element_by_id("touAgreeBtn").click()
           except:
@@ -139,7 +139,7 @@ class Data:
           webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
           
           i = 1
-          while state == True:
+          while i < 3:#state == True:
                try:
                     i += 1
                     driver.find_elements_by_link_text(str(i))[0].click()
@@ -156,9 +156,9 @@ class Data:
 url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
 # product = "https://www.footlocker.com/product/~/A5AO95KO.html"
 # Data.get_product_fl([product])
-Data.get_product_link(url)
-s = Data.scrape(url)
-print(s[-1])
-print("len: ", len(s))
-Data.get_product_fl(s)
+# Data.get_product_link(url)
+# s = Data.scrape(url)
+# print(s[-1])
+# print("len: ", len(s))
+# Data.get_product_fl(s)
 #Data.get_product_fl(["https://www.footlocker.com/product/birkenstock-arizona-womens/1019046B.html"])

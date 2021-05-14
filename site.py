@@ -2,6 +2,8 @@
 
 from automated import Data
 import pandas as pd
+from argparse import ArgumentParser
+import sys
 
 def store_features(shoe_dict):
     """Takes a dictionary with the attributes of shoes returned from 
@@ -65,31 +67,66 @@ def print_features(dict):
 #     """
 #     pass
 
+def find_shoe(attributes, csv):
+    """Takes some attributes and the csv file created by the store_features()
+        function and finds the shoe or shoes that mention the attributes the 
+        most on its product page. 
+        
+    Args:
+        attributes (list): a list of the attributes given by the user.
+        csv (csv file): the csv file created by the store_features function.
+        
+    Returns:
+        A string representing the modified product ID of the shoe, 
+            or shoes if the number of matching instances is a tie.
+    """
+    list_counts = []
+    for line in csv:
+        count = 0
+        for word in line:
+            for i in attributes:
+                if word == attributes[i]:
+                    count += 1
+        list_counts.append(count)
+
 def main(criteria):
     """Takes criteria given by the user and suggests relevant shoes that 
         meet the criteria.
         
     Args: 
-        criteria (str): the criteria given by the user (has some optional
+        criteria (list): the criteria given by the user (has some optional
             fields).
             
     Returns:
         The suggested shoe's attributes as a dictionary
     """
-    pass
+    if(criteria[0] == "M"):
+        a = Data.scrape("https://www.footlocker.com/category/mens/shoes.html?currentPage=0")
+    elif(criteria[0] == "W"):
+        a = Data.scrape("https://www.footlocker.com/category/womens/shoes.html?currentPage=0")
+    else:
+        print("Please choose either 'M' or 'W'")
+    #print(type(criteria[0]))
+    #print(a)
 
 def parse_args(args_list):
-    """Create an instance of an ArgumentParser object and assigns one argument
-        to it named "criteria" of type str. This argument accepts any number of
-        command line arguments and creates a list of them. 
+    """Create an instance of an ArgumentParser object and assigns two arguments
+        to it named "gender" and "attributes" of type str. 
         
     Arguments: 
-        args_list (list): a list of command line arguments (any length)
+        args_list (str): the command line arguments 
         
     Returns:
-        ArgumentParser object created
+        A list of the two arguments from the ArgumentParser object created.
     """
-    pass
+    parser = ArgumentParser(description = "Take a page and some attributes.")
+    parser.add_argument("--gender", type = str)
+    parser.add_argument("--attributes", type = str, nargs = "+")
+    p = parser.parse_args(args_list)
+    #print(p.gender)
+    return [p.gender, p.attributes]
+    
 
 if __name__ == "__main__":
-    pass
+    args = parse_args(sys.argv[1:])
+    main(args)
