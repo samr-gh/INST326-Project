@@ -1,0 +1,5 @@
+These are the sources we used to help write this program. 
+The numbers will be referenced in the code so you can see which ones were used where. 
+
+1. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.from_dict.html 
+2. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html

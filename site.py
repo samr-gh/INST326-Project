@@ -1,35 +1,23 @@
 
 
 from automated import Data
+import pandas as pd
 
-
-def store_features(links):
-    """Gets the attributes of a shoe from its specific link
-        and stores them in a new csv file.
+def store_features(shoe_dict):
+    """Takes a dictionary with the attributes of shoes returned from 
+        get_product_fl() from the Data class. Creates a csv file storing them.
     
     Args:
-        links (list): a list of links returned by the scrape() function. 
+        shoe_dict (dict): a dictionary with keys as different attributes of shoes
+            and values of lists returned by the get_product_fl() function. 
         
-    Returns:
-        The csv file created. 
+    No return 
     """
-    #     links = []
-    #     links.append(feature['product_names'])
-    #     links.append(feature.product_names)
-    # print(links)
+    #Source 1
+    df = pd.DataFrame.from_dict(shoe_dict)
+    #Source 2
+    csv = df.to_csv("shoe_attributes.csv")
     
-    #     links = []
-    #     name = feature.find('name')
-    #     gender = feature.find('gender')
-    #     links.append((name, gender))
-        
-    # df = pd.DataFrame(links, columns = [name])
-    # df.to_csv('shoe_attributes.csv', encoding='utf-8')
-    pass
-
-url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
-links = Data.scrape(url)
-store_features(links)
 
 def print_features(dict):
     """Takes a shoe and prints the attributes of it

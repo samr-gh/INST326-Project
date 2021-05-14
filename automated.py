@@ -46,13 +46,13 @@ class Data:
                     p = soup.find('span', class_='ProductName-alt')
                     product_gender.append(p.text)
                except AttributeError:
-                    pass
+                    continue
                
                try:
                     p = soup.find('p', class_='ProductDetails-form__label')
                     product_colors.append(p.text)
                except AttributeError:
-                    pass
+                    continue
                
                try:    
                     p = soup.find('span', class_='ProductPrice')
@@ -62,26 +62,26 @@ class Data:
                          price = re.search(r"to \$(.*)\$.*\$", p.text).group(1)
                          product_prices.append(float(price))
                except AttributeError:
-                    pass
+                    continue
                
                try:
                     p = soup.find('div', class_='ProductDetails-description')
                     product_description.append(p.text)
                except AttributeError:
-                    pass
+                    continue
                
                try:      
                     p = soup.find('div', class_='ProductSize-group')
                     product_sizes.append(p.text)
                except AttributeError:
-                    pass
+                    continue
                
                try:
                     p = soup.find('div', class_='Tab-panel')
                     number = re.search(r"#: (\w+\d\w*)", p.text).group(1)
                     product_num.append(number)
                except AttributeError:
-                    pass
+                    continue
                
           
           print({"Name": product_names[:3], "Gender": product_gender[:3], 
