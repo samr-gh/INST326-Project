@@ -10,3 +10,9 @@
     
     To interpret the output of the program, you would see the shoe that best fits the user criteria and satisfies what they
     are searching for."""
+from site import store_features
+import unittest   
+
+def test_store_features(self):
+    self.assertEqual(store_features.csv, dict)
+    
