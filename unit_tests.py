@@ -14,6 +14,7 @@
 #These are planned unit tests
 import unittest
 from automated import Data
+from site import store_features
 
 class TestAuto(unittest.TestCase):
     def test_productfl(self):
@@ -43,4 +44,7 @@ class TestAuto(unittest.TestCase):
 		# assertEqual d.scrape(shoe_links,'mens')
 			
 		#This is to test that we get the required list of links 
-		# assertListEqual Data.get_product_link == []
+		# assertListEqual Data.get_product_link == [] 
+	def test_store_features(self):
+    	self.assertEqual(store_features.csv, dict)
+    
