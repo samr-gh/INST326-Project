@@ -84,10 +84,10 @@ class Data:
                     continue
                
           
-          print({"Name": product_names[:3], "Gender": product_gender[:3], 
+          return {"Name": product_names[:3], "Gender": product_gender[:3], 
                  "Colors: ": product_colors[:3], "Price": product_prices[:3],
                  "Description": product_description[:3], "Sizes": product_sizes[:3],
-                 "Product ID": product_num[:3]})
+                 "Product ID": product_num[:3]}
           
           
      def get_product_link(site):

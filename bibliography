@@ -7,3 +7,5 @@ The numbers will be referenced in the code so you can see which ones were used w
     Used in the implementation of to_csv().
 3. https://docs.python.org/3/library/argparse.html
     Used to help in the writing of the parse_args() function.
+4. https://stackoverflow.com/questions/26464567/csv-read-specific-row
+    Used in the find_shoe() function to find a row in the csv. 
