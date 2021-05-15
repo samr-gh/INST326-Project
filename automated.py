@@ -1,4 +1,5 @@
-
+"""This script deals with scraping data from the Footlocker site. 
+"""
 
 import urllib.request
 import requests
@@ -117,6 +118,7 @@ class Data:
           
           Args:
                url (str): the url of the Footlocker website. 
+               PATH (str): the PATH specified by the user.
                
           Returns:
                A list of links to each Men's shoe on the url page.
@@ -125,21 +127,21 @@ class Data:
           state = True
           
           shoe_links.extend(Data.get_product_link(url))
-          
-          #PATH = "C:\Program Files (x86)\chromedriver.exe"
+
           driver = webdriver.Chrome(PATH)
           driver.get(url)
           
-          time.sleep(1.5)
+          time.sleep(3)
           try:
                driver.find_element_by_id("touAgreeBtn").click()
           except:
                pass
-          time.sleep(3)
+          time.sleep(6)
+          #Source 6 
           webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
           
           i = 1
-          while i < 3:#state == True:
+          while state == True:
                try:
                     i += 1
                     driver.find_elements_by_link_text(str(i))[0].click()
@@ -153,12 +155,3 @@ class Data:
 
           return shoe_links
 
-url = "https://www.footlocker.com/category/womens/shoes.html?currentPage=0"
-# product = "https://www.footlocker.com/product/~/A5AO95KO.html"
-# Data.get_product_fl([product])
-# Data.get_product_link(url)
-# s = Data.scrape(url)
-# print(s[-1])
-# print("len: ", len(s))
-# Data.get_product_fl(s)
-#Data.get_product_fl(["https://www.footlocker.com/product/birkenstock-arizona-womens/1019046B.html"])

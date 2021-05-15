@@ -9,4 +9,7 @@ The numbers will be referenced in the code so you can see which ones were used w
     Used to help in the writing of the parse_args() function.
 4. https://stackoverflow.com/questions/26464567/csv-read-specific-row
     Used in the find_shoe() function to find a row in the csv. 
-5. https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaisesRegex
+5. https://docs.python.org/3/library/unittest.html
+    Used to write unit tests. 
+6. https://www.geeksforgeeks.org/action-chains-in-selenium-python/
+    Used to escape out of a sign-up pop-up in the Footlocker site. 

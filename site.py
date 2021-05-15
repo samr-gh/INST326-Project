@@ -1,4 +1,5 @@
-
+"""This script deals with the functional printing of information of our program
+"""
 
 from automated import Data
 import pandas as pd
@@ -37,18 +38,19 @@ def find_shoe(attributes):
     """
     list_counts = []
     
-    with open("shoe_attributes.csv") as f:
+    with open("shoe_attributes.csv", encoding = "utf-8") as f:
         for line in f:
+            lower_line = line.lower()
             inst = 0
             count = len(attributes) - 1
             while count >= 0:
-                if attributes[count] in line:
-                    inst += line.count(attributes[count])
+                if attributes[count] in lower_line:
+                    inst += lower_line.count(attributes[count])
                 count -= 1
             list_counts.append(inst)
         winner = list_counts.index(max(list_counts))
     #Source 4
-    with open("shoe_attributes.csv") as csv_file:
+    with open("shoe_attributes.csv", encoding = "utf-8") as csv_file:
         reader = csv.reader(csv_file)
         rows = list(reader)
     
