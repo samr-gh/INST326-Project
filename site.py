@@ -37,7 +37,7 @@ def find_shoe(attributes):
     """
     list_counts = []
     
-    with open("test.csv") as f:
+    with open("shoe_attributes.csv") as f:
         for line in f:
             inst = 0
             count = len(attributes) - 1
@@ -48,7 +48,7 @@ def find_shoe(attributes):
             list_counts.append(inst)
         winner = list_counts.index(max(list_counts))
     #Source 4
-    with open("test.csv") as csv_file:
+    with open("shoe_attributes.csv") as csv_file:
         reader = csv.reader(csv_file)
         rows = list(reader)
     
@@ -66,9 +66,9 @@ def main(criteria):
     No return
     """
     if(criteria[0] == "M"):
-        shoe_links = Data.scrape("https://www.footlocker.com/category/mens/shoes.html?currentPage=0")
+        shoe_links = Data.scrape("https://www.footlocker.com/category/mens/shoes.html?currentPage=0", criteria[2])
     elif(criteria[0] == "W"):
-        shoe_links = Data.scrape("https://www.footlocker.com/category/womens/shoes.html?currentPage=0")
+        shoe_links = Data.scrape("https://www.footlocker.com/category/womens/shoes.html?currentPage=0", criteria[2])
     else:
         print("Please select a gender by choosing either 'M' or 'W'")
         
@@ -91,9 +91,10 @@ def parse_args(args_list):
     parser = ArgumentParser(description = "Take a page and some attributes.")
     parser.add_argument("--gender", type = str)
     parser.add_argument("--attributes", type = str, nargs = "+")
+    parser.add_argument("--PATH", type = str)
     p = parser.parse_args(args_list)
     
-    return [p.gender, p.attributes]
+    return [p.gender, p.attributes, p.PATH]
     
 
 if __name__ == "__main__":

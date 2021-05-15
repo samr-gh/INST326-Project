@@ -84,10 +84,10 @@ class Data:
                     continue
                
           
-          return {"Name": product_names[:3], "Gender": product_gender[:3], 
-                 "Colors: ": product_colors[:3], "Price": product_prices[:3],
-                 "Description": product_description[:3], "Sizes": product_sizes[:3],
-                 "Product ID": product_num[:3]}
+          return {"Name": product_names, "Gender": product_gender, 
+                 "Colors: ": product_colors, "Price": product_prices,
+                 "Description": product_description, "Sizes": product_sizes,
+                 "Product ID": product_num}
           
           
      def get_product_link(site):
@@ -111,7 +111,7 @@ class Data:
                list_links.append("https://www.footlocker.com" + p.get("href"))
           return list_links
           
-     def scrape(url):
+     def scrape(url, PATH):
           """Uses Selenium to iterate through all pages of Footlocker's Men's shoes. 
                Calls the Data class from automated.py to store the data to a tuple. 
           
@@ -126,7 +126,7 @@ class Data:
           
           shoe_links.extend(Data.get_product_link(url))
           
-          PATH = "C:\Program Files (x86)\chromedriver.exe"
+          #PATH = "C:\Program Files (x86)\chromedriver.exe"
           driver = webdriver.Chrome(PATH)
           driver.get(url)
           
